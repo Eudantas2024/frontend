@@ -1,11 +1,12 @@
-document.getElementById("loginForm").addEventListener("submit", async function(event) {
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
     event.preventDefault();
-    
+
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
     // ✅ Substituímos localhost pela URL do backend no Render
-    const API_URL = "https://backend-goaq.onrender.com/api/users/login";
+    const API_URL = "https://backend-goaq.onrender.com/api/users";
+    fetch(`${API_URL}/login`, { ...});
 
 
     const response = await fetch(`${API_URL}/login`, {
