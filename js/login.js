@@ -31,10 +31,14 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
         // ✅ Armazena o token e redireciona corretamente
         if (data.token) {
-            localStorage.setItem("token", data.token);
-            window.location.href = "moderador.html";
-
+            localStorage.setItem("token", data.token); // ✅ Salva o token
+            console.log("🔍 Token salvo:", data.token); // ✅ Adiciona log de depuração
+            window.location.href = "moderador.html"; // ✅ Redireciona para a área de moderação
+        } else {
+            console.error("❌ Falha no login:", data);
+            alert("Erro ao fazer login. Usuário ou senha incorretos.");
         }
+
     } catch (error) {
         console.error("❌ Erro ao realizar login:", error);
         alert("Erro ao conectar com o servidor. Tente novamente mais tarde.");
