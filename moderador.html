@@ -1,7 +1,6 @@
 <!-- Essa é a Página do Moderador que controla o site -->
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,25 +11,18 @@
 <body id="restrictedContent">
     <div class="container">
         <h1>MODERADOR</h1>
-        <br><br>
         <p>Área restrita - apenas para usuários autenticados.</p>
-        <br>
         <a href="formreg.html">Página de cadastro de moderadores</a>
-        <br><br>
-     
         <p>Não esqueça de fazer logout clicando em 'SAIR' quando terminar</p>
-        <br>
         <button onclick="logout()">SAIR</button>
-        <br>
-        <!-- Mensagem temporária de logout -->
+
         <div id="logoutMessage">✅ Logout realizado com sucesso!</div>
-        <br>
+
         <h2>Últimas Reclamações</h2>
-        <br>
         <div id="listaReclamacoes"></div>
     </div>
 
-    <!-- Formulário de edição (inicialmente oculto) -->
+    <!-- Formulário de edição -->
     <div id="editarForm" class="modal">
         <div class="modal-content">
             <span class="close" onclick="fecharFormulario()">&times;</span>
@@ -53,5 +45,4 @@
     <script src="js/conteudo.js"></script>
     <script src="js/moderador.js"></script>
 </body>
-
 </html>
