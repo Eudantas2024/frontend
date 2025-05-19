@@ -1,4 +1,3 @@
-<!-- Essa é a Página do Moderador que controla o site -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,29 +15,31 @@
         <p>Não esqueça de fazer logout clicando em 'SAIR' quando terminar</p>
         <button onclick="logout()">SAIR</button>
 
-        <div id="logoutMessage">✅ Logout realizado com sucesso!</div>
+        <div id="logoutMessage" style="display: none;">✅ Logout realizado com sucesso!</div>
 
         <h2>Últimas Reclamações</h2>
         <div id="listaReclamacoes"></div>
     </div>
 
-    <!-- Formulário de edição -->
-    <div id="editarForm" class="modal">
+    <!-- Formulário de edição (inicialmente oculto) -->
+    <div id="editarForm" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="fecharFormulario()">&times;</span>
             <h2>Editar Reclamação</h2>
-            <input type="text" id="editNome" placeholder="Nome">
-            <input type="email" id="editEmail" placeholder="Email">
-            <input type="text" id="editEmpresa" placeholder="Empresa Reclamada">
-            <input type="text" id="editLogradouro" placeholder="Rua">
-            <input type="text" id="editNumero" placeholder="Número">
-            <input type="text" id="editBairro" placeholder="Bairro">
-            <input type="text" id="editComplemento" placeholder="Complemento">
-            <input type="text" id="editCidade" placeholder="Cidade">
-            <input type="text" id="editUf" placeholder="UF">
-            <textarea id="editComentario" placeholder="Comentário"></textarea>
-            <button id="salvarEdicao">Salvar</button>
-            <button onclick="fecharFormulario()">Cancelar</button>
+            <form id="editForm">
+                <input type="text" id="editNome" placeholder="Nome">
+                <input type="email" id="editEmail" placeholder="Email">
+                <input type="text" id="editEmpresa" placeholder="Empresa Reclamada">
+                <input type="text" id="editLogradouro" placeholder="Rua">
+                <input type="text" id="editNumero" placeholder="Número">
+                <input type="text" id="editBairro" placeholder="Bairro">
+                <input type="text" id="editComplemento" placeholder="Complemento">
+                <input type="text" id="editCidade" placeholder="Cidade">
+                <input type="text" id="editUf" placeholder="UF">
+                <textarea id="editComentario" placeholder="Comentário"></textarea>
+                <button type="button" id="salvarEdicao">Salvar</button>
+                <button type="button" onclick="fecharFormulario()">Cancelar</button>
+            </form>
         </div>
     </div>
 

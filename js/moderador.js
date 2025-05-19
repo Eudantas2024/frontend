@@ -54,7 +54,7 @@ function adicionarEventos() {
     document.querySelectorAll(".editar-btn").forEach((botao) => {
         botao.addEventListener("click", function () {
             const id = this.getAttribute("data-id");
-            console.log(`🛠 Clique no botão Editar. ID: ${id}`); // ✅ Debug
+            console.log(`🛠 Clique no botão Editar. ID: ${id}`);
             abrirFormularioEdicao(id);
         });
     });
@@ -67,10 +67,9 @@ function adicionarEventos() {
     });
 }
 
-
 // 🚀 Função para abrir o formulário de edição
 function abrirFormularioEdicao(id) {
-    console.log(`🔍 Tentando carregar reclamação ID: ${id}`); // ✅ Debug
+    console.log(`🔍 Tentando carregar reclamação ID: ${id}`);
 
     fetch(`${API_URL}/api/opinioes/${id}`, {
         method: "GET",
@@ -108,28 +107,48 @@ function abrirFormularioEdicao(id) {
     });
 }
 
-
-// 🚀 Função para excluir reclamação
-function excluirReclamacao(id) {
-    if (confirm("Tem certeza que deseja excluir esta reclamação?")) {
-        fetch(`${API_URL}/api/opinioes/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json"
-            }
-        })
-        .then((res) => {
-            if (res.ok) {
-                alert("Reclamação excluída.");
-                carregarReclamacoes();
-            } else {
-                alert("Erro ao excluir.");
-            }
-        })
-        .catch(() => alert("Erro de conexão."));
-    }
+// 🚀 Função para fechar o formulário de edição
+function fecharFormulario() {
+    document.getElementById("editarForm").style.display = "none";
+    console.log("✅ Formulário fechado com sucesso!");
 }
+
+// 🚀 Função para salvar edição via PUT
+document.getElementById("salvarEdicao").addEventListener("click", function () {
+    const id = this.getAttribute("data-id");
+
+    const atualizados = {
+        nome: document.getElementById("editNome").value,
+        email: document.getElementById("editEmail").value,
+        empresa: document.getElementById("editEmpresa").value,
+        logradouro: document.getElementById("editLogradouro").value,
+        numero: document.getElementById("editNumero").value,
+        bairro: document.getElementById("editBairro").value,
+        complemento: document.getElementById("editComplemento").value,
+        cidade: document.getElementById("editCidade").value,
+        uf: document.getElementById("editUf").value,
+        comentario: document.getElementById("editComentario").value,
+    };
+
+    fetch(`${API_URL}/api/opinioes/${id}`, {
+        method: "PUT",
+        headers: { 
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(atualizados),
+    })
+    .then((res) => {
+        if (res.ok) {
+            alert("Reclamação atualizada com sucesso.");
+            carregarReclamacoes();
+            fecharFormulario();
+        } else {
+            alert("Erro ao atualizar.");
+        }
+    })
+    .catch(() => alert("Erro de conexão."));
+});
 
 // 🚀 Inicia a página carregando as reclamações
 window.onload = function () {
