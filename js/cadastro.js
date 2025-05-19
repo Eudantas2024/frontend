@@ -4,29 +4,39 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // ✅ Usando a URL do Render em vez de localhost
+    // ✅ URL correta do backend no Render
     const API_URL = "https://backend-goaq.onrender.com/api/users";
-    fetch(`${API_URL}/register`, { ...});
 
-    const response = await fetch(`${API_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-    });
+    try {
+        const response = await fetch(`${API_URL}/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        });
 
-    const data = await response.json();
+        // ✅ Verifica se a resposta foi bem-sucedida
+        if (!response.ok) {
+            throw new Error(`Erro ${response.status}: ${response.statusText}`);
+        }
 
-    const messageBox = document.getElementById("registerMessage");
-    messageBox.textContent = data.message;
-    messageBox.style.display = "block";
+        const data = await response.json();
 
-    setTimeout(() => {
-        messageBox.style.display = "none"; // Oculta a mensagem após 2 segundos
-    }, 2000);
+        const messageBox = document.getElementById("registerMessage");
+        messageBox.textContent = data.message;
+        messageBox.style.display = "block";
 
-    if (data.message.includes("Usuário registrado com sucesso")) {
         setTimeout(() => {
-            window.location.href = "index.html";
+            messageBox.style.display = "none"; // Oculta a mensagem após 2 segundos
         }, 2000);
+
+        // ✅ Redireciona apenas se a resposta for positiva
+        if (data.message && data.message.includes("Usuário registrado com sucesso")) {
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000);
+        }
+    } catch (error) {
+        console.error("❌ Erro ao registrar usuário:", error);
+        alert("Erro ao conectar com o servidor. Tente novamente mais tarde.");
     }
 });
