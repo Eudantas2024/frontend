@@ -1,11 +1,14 @@
 // 🚀 Verificação de autenticação antes de carregar a página
 const token = localStorage.getItem("token");
+console.log("🔍 Token no localStorage:", token); // ✅ Depuração
+
 if (!token) {
     console.error("❌ Usuário não autenticado! Redirecionando...");
     window.location.href = "index.html";
 } else {
-    console.log("🔍 Usuário autenticado, carregando página...");
+    console.log("✅ Usuário autenticado, carregando página...");
 }
+
 
 // 🚀 URL do backend
 const API_URL = "https://backend-goaq.onrender.com"; 
