@@ -37,7 +37,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             // 🔥 Adiciona um atraso para depuração
             setTimeout(() => {
                 window.location.href = "moderador.html"; // ✅ Redireciona após 5 segundos
-            }, 9000);
+            }, 1000);
         } else {
             console.error("❌ Falha no login:", data);
             alert("Erro ao fazer login. Usuário ou senha incorretos.");
