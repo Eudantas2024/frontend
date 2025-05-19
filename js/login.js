@@ -32,7 +32,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         // ✅ Armazena o token e redireciona corretamente
         if (data.token) {
             localStorage.setItem("token", data.token);
-            window.location.href = "/frontend/moderador.html";
+            window.location.href = "/moderador.html";
 
         }
     } catch (error) {
