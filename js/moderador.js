@@ -53,16 +53,61 @@ function carregarReclamacoes() {
 function adicionarEventos() {
     document.querySelectorAll(".editar-btn").forEach((botao) => {
         botao.addEventListener("click", function () {
-            abrirFormularioEdicao(this.getAttribute("data-id"));
+            const id = this.getAttribute("data-id");
+            console.log(`🛠 Clique no botão Editar. ID: ${id}`); // ✅ Debug
+            abrirFormularioEdicao(id);
         });
     });
 
     document.querySelectorAll(".btn-excluir").forEach((botao) => {
         botao.addEventListener("click", function () {
-            excluirReclamacao(this.getAttribute("data-id"));
+            const id = this.getAttribute("data-id");
+            excluirReclamacao(id);
         });
     });
 }
+
+
+// 🚀 Função para abrir o formulário de edição
+function abrirFormularioEdicao(id) {
+    console.log(`🔍 Tentando carregar reclamação ID: ${id}`); // ✅ Debug
+
+    fetch(`${API_URL}/api/opinioes/${id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error(`❌ Erro ao buscar dados. Status: ${res.status}`);
+        }
+        return res.json();
+    })
+    .then((reclamacao) => {
+        console.log("✅ Dados carregados:", reclamacao);
+
+        document.getElementById("editNome").value = reclamacao.nome || "";
+        document.getElementById("editEmail").value = reclamacao.email || "";
+        document.getElementById("editEmpresa").value = reclamacao.empresa || "";
+        document.getElementById("editLogradouro").value = reclamacao.logradouro || "";
+        document.getElementById("editNumero").value = reclamacao.numero || "";
+        document.getElementById("editBairro").value = reclamacao.bairro || "";
+        document.getElementById("editComplemento").value = reclamacao.complemento || "";
+        document.getElementById("editCidade").value = reclamacao.cidade || "";
+        document.getElementById("editUf").value = reclamacao.uf || "";
+        document.getElementById("editComentario").value = reclamacao.comentario || "";
+
+        document.getElementById("salvarEdicao").setAttribute("data-id", id);
+        document.getElementById("editarForm").style.display = "block";
+    })
+    .catch((error) => {
+        console.error("❌ Erro ao carregar dados da reclamação:", error);
+        alert("Erro ao carregar dados.");
+    });
+}
+
 
 // 🚀 Função para excluir reclamação
 function excluirReclamacao(id) {
