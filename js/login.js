@@ -32,12 +32,13 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         // ✅ Armazena o token e redireciona corretamente
         if (data.token) {
             localStorage.setItem("token", data.token); // ✅ Salva o token
-            console.log("🔍 Token salvo:", data.token); // ✅ Adiciona log de depuração
-            window.location.href = "moderador.html"; // ✅ Redireciona para a área de moderação
+            console.log("🔍 Token salvo:", localStorage.getItem("token")); // ✅ Confirma se o token está salvo
+            window.location.href = "moderador.html"; // ✅ Redireciona para a página correta
         } else {
             console.error("❌ Falha no login:", data);
             alert("Erro ao fazer login. Usuário ou senha incorretos.");
         }
+
 
     } catch (error) {
         console.error("❌ Erro ao realizar login:", error);

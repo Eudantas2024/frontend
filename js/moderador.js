@@ -1,8 +1,23 @@
-// 🚀 Carrega as reclamações e exibe na página
-const API_URL = "https://backend-goaq.onrender.com"; // ✅ URL do backend
+// 🚀 Verificação de autenticação antes de carregar a página
+const token = localStorage.getItem("token");
+if (!token) {
+    console.error("❌ Usuário não autenticado! Redirecionando...");
+    window.location.href = "index.html";
+} else {
+    console.log("🔍 Usuário autenticado, carregando página...");
+}
+
+// 🚀 URL do backend
+const API_URL = "https://backend-goaq.onrender.com"; 
 
 function carregarReclamacoes() {
-  fetch(`${API_URL}/api/opinioes`)
+  fetch(`${API_URL}/api/opinioes`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${localStorage.getItem("token")}`, // ✅ Envia token na requisição
+      "Content-Type": "application/json"
+    }
+  })
     .then((res) => res.json())
     .then((reclamacoes) => {
       const container = document.getElementById("listaReclamacoes");
@@ -32,7 +47,8 @@ function carregarReclamacoes() {
 
       adicionarEventosEdicao(reclamacoes);
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error("❌ Erro ao carregar reclamações:", error);
       document.getElementById("listaReclamacoes").innerText = "Erro ao carregar reclamações.";
     });
 }
@@ -40,7 +56,13 @@ function carregarReclamacoes() {
 // 🚀 Excluir reclamação via DELETE
 function excluirReclamacao(id) {
   if (confirm("Tem certeza que deseja excluir esta reclamação?")) {
-    fetch(`${API_URL}/api/opinioes/${id}`, { method: "DELETE" })
+    fetch(`${API_URL}/api/opinioes/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`, // ✅ Adicionado token para exclusão
+        "Content-Type": "application/json"
+      }
+    })
       .then((res) => {
         if (res.ok) {
           alert("Reclamação excluída.");
@@ -72,7 +94,10 @@ document.getElementById("salvarEdicao").addEventListener("click", function () {
 
   fetch(`${API_URL}/api/opinioes/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Authorization": `Bearer ${localStorage.getItem("token")}`, // ✅ Adicionado token para edição
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(atualizados),
   })
     .then((res) => {
