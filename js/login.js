@@ -32,12 +32,17 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         // ✅ Armazena o token e redireciona corretamente
         if (data.token) {
             localStorage.setItem("token", data.token); // ✅ Salva o token
-            console.log("🔍 Token salvo:", localStorage.getItem("token")); // ✅ Confirma se o token está salvo
-            window.location.href = "moderador.html"; // ✅ Redireciona para a página correta
+            console.log("🔍 Token salvo:", data.token); // ✅ Exibe o token antes do redirecionamento
+
+            // 🔥 Adiciona um atraso para depuração
+            setTimeout(() => {
+                window.location.href = "moderador.html"; // ✅ Redireciona após 5 segundos
+            }, 9000);
         } else {
             console.error("❌ Falha no login:", data);
             alert("Erro ao fazer login. Usuário ou senha incorretos.");
         }
+
 
 
     } catch (error) {
