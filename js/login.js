@@ -4,7 +4,10 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:3000/login", {
+    // ✅ Substituímos localhost pela URL do backend no Render
+    const API_URL = "https://backend-yv4g.onrender.com";
+
+    const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -20,6 +23,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         messageBox.style.display = "none";
     }, 2000);
 
+    // ✅ Armazena o token e redireciona corretamente
     if (data.token) {
         localStorage.setItem("token", data.token);
         window.location.href = "moderador.html";

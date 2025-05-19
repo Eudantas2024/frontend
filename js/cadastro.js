@@ -4,7 +4,10 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:3000/register", {
+    // ✅ Usando a URL do Render em vez de localhost
+    const API_URL = "https://backend-yv4g.onrender.com";
+
+    const response = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })

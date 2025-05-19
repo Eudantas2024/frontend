@@ -5,20 +5,31 @@ async function checkAuth() {
         return;
     }
 
-    const response = await fetch("http://localhost:3000/conteudo", {
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}` }
-    });
+    // ✅ Substituímos localhost pela URL do backend no Render
+    const API_URL = "https://backend-yv4g.onrender.com";
 
-    const data = await response.json();
-    if (response.status !== 200) {
+    try {
+        const response = await fetch(`${API_URL}/conteudo`, {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            localStorage.removeItem("token");
+            window.location.href = "index.html";
+            return;
+        }
+
+        const data = await response.json();
+        document.getElementById("restrictedContent").style.display = "block"; // Exibe o conteúdo apenas após validação
+    } catch (error) {
+        console.error("Erro na autenticação:", error);
         localStorage.removeItem("token");
         window.location.href = "index.html";
-    } else {
-        document.getElementById("restrictedContent").style.display = "block"; // Exibe o conteúdo apenas após validação
     }
 }
 
+// ✅ Chama a função para verificar a autenticação
 checkAuth();
 
 function logout() {

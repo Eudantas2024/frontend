@@ -1,7 +1,6 @@
-// Aqui é feito o cadastro do Consumidor e tambem onde ele vai registrar a sua reclamação
+// 🚀 Aqui é feito o cadastro do consumidor e registro de reclamação
 
-
-// api viacep, busca os dados do endereço quando digita o cep.
+// API ViaCEP: busca os dados do endereço quando digita o CEP
 function buscarCEP() {
     const cep = document.getElementById("cep").value;
     if (cep.length === 8) {
@@ -20,6 +19,9 @@ function buscarCEP() {
 
 function cadastrarConsumidor(event) {
     event.preventDefault();
+
+    const API_URL = "https://backend-yv4g.onrender.com"; // ✅ Substituímos localhost pela URL do Render
+
     const dados = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
@@ -34,7 +36,7 @@ function cadastrarConsumidor(event) {
         comentario: document.getElementById("comentario").value
     };
 
-    fetch("http://localhost:3000/api/opinioes", {
+    fetch(`${API_URL}/api/opinioes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
