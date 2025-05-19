@@ -1,5 +1,5 @@
 // 🚀 Carrega as reclamações e exibe na página
-const API_URL = "https://backend-goaq.onrender.com/"; // ✅ URL do backend
+const API_URL = "https://backend-goaq.onrender.com"; // ✅ URL do backend
 
 function carregarReclamacoes() {
   fetch(`${API_URL}/api/opinioes`)

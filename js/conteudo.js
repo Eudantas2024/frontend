@@ -6,7 +6,7 @@ async function checkAuth() {
     }
 
     // ✅ Substituímos localhost pela URL do backend no Render
-    const API_URL = "https://backend-goaq.onrender.com/";
+    const API_URL = "https://backend-goaq.onrender.com";
 
     try {
         const response = await fetch(`${API_URL}/conteudo`, {

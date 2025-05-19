@@ -5,7 +5,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     const password = document.getElementById("password").value;
 
     // ✅ Usando a URL do Render em vez de localhost
-    const API_URL = "https://backend-goaq.onrender.com/";
+    const API_URL = "https://backend-goaq.onrender.com";
 
     const response = await fetch(`${API_URL}/register`, {
         method: "POST",
