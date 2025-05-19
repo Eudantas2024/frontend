@@ -53,12 +53,7 @@ function carregarReclamacoes() {
             container.appendChild(div);
         });
 
-        // ✅ Adicionado verificação antes de chamar a função
-        if (typeof adicionarEventosEdicao === "function") {
-            adicionarEventosEdicao(reclamacoes);
-        } else {
-            console.warn("⚠️ Função adicionarEventosEdicao não encontrada.");
-        }
+        adicionarEventosEdicao();
     })
     .catch((error) => {
         console.error("❌ Erro ao carregar reclamações:", error);
@@ -66,8 +61,79 @@ function carregarReclamacoes() {
     });
 }
 
-// 🚀 Função de exclusão e edição seguem sem mudanças
-// 🚀 Função para verificar se adicionarEventosEdicao() está definida
+// 🚀 Função para adicionar eventos de edição nos botões Editar
+function adicionarEventosEdicao() {
+    document.querySelectorAll(".editar-btn").forEach((botao) => {
+        botao.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+            abrirFormularioEdicao(id);
+        });
+    });
+}
+
+// 🚀 Função para abrir o formulário de edição
+function abrirFormularioEdicao(id) {
+    fetch(`${API_URL}/api/opinioes/${id}`)
+        .then((res) => res.json())
+        .then((reclamacao) => {
+            document.getElementById("editNome").value = reclamacao.nome;
+            document.getElementById("editEmail").value = reclamacao.email;
+            document.getElementById("editEmpresa").value = reclamacao.empresa;
+            document.getElementById("editLogradouro").value = reclamacao.logradouro;
+            document.getElementById("editNumero").value = reclamacao.numero;
+            document.getElementById("editBairro").value = reclamacao.bairro;
+            document.getElementById("editComplemento").value = reclamacao.complemento;
+            document.getElementById("editCidade").value = reclamacao.cidade;
+            document.getElementById("editUf").value = reclamacao.uf;
+            document.getElementById("editComentario").value = reclamacao.comentario;
+
+            // ✅ Atualiza o botão de salvar edição com o ID correto
+            document.getElementById("salvarEdicao").setAttribute("data-id", id);
+
+            document.getElementById("editarForm").style.display = "block";
+        })
+        .catch((error) => {
+            console.error("❌ Erro ao carregar dados da reclamação:", error);
+            alert("Erro ao carregar dados.");
+        });
+}
+
+// 🚀 Função para salvar edição via PUT
+document.getElementById("salvarEdicao").addEventListener("click", function () {
+    const id = this.getAttribute("data-id");
+
+    const atualizados = {
+        nome: document.getElementById("editNome").value,
+        email: document.getElementById("editEmail").value,
+        empresa: document.getElementById("editEmpresa").value,
+        logradouro: document.getElementById("editLogradouro").value,
+        numero: document.getElementById("editNumero").value,
+        bairro: document.getElementById("editBairro").value,
+        complemento: document.getElementById("editComplemento").value,
+        cidade: document.getElementById("editCidade").value,
+        uf: document.getElementById("editUf").value,
+        comentario: document.getElementById("editComentario").value,
+    };
+
+    fetch(`${API_URL}/api/opinioes/${id}`, {
+        method: "PUT",
+        headers: { 
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(atualizados),
+    })
+    .then((res) => {
+        if (res.ok) {
+            alert("Reclamação atualizada com sucesso.");
+            carregarReclamacoes();
+            document.getElementById("editarForm").style.display = "none";
+        } else {
+            alert("Erro ao atualizar.");
+        }
+    })
+    .catch(() => alert("Erro de conexão."));
+});
 
 // 🚀 Inicia a página carregando as reclamações
 window.onload = function () {
