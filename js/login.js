@@ -32,7 +32,8 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         // ✅ Armazena o token e redireciona corretamente
         if (data.token) {
             localStorage.setItem("token", data.token);
-            window.location.href = "moderador.html";
+            window.location.href = "/frontend/moderador.html";
+
         }
     } catch (error) {
         console.error("❌ Erro ao realizar login:", error);
