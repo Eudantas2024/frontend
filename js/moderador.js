@@ -31,7 +31,7 @@ function carregarReclamacoes() {
         div.className = "reclamacao";
         div.innerHTML = `
                 <p><strong>Registrado em:</strong> ${new Date(rec.data).toLocaleString()}</p>
-                <p><strong>Empresa Reclamada:</strong> ${rec.empresa}</p>
+                <p><strong>Empresa Reclamada:</strong> ${rec.empresa}</p><br> <p>DADOS DO CONSUMIDOR</p>
                 <p><strong>Nome:</strong> ${rec.nome} | <strong>Email:</strong> ${rec.email}</p>
                 <p><strong>Endereço:</strong> ${rec.logradouro} <strong>Nº:</strong> ${rec.numero}
                  <strong>Bairro:</strong> ${rec.bairro} <strong>Complemento:</strong> ${rec.complemento}</p> 
