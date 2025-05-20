@@ -34,7 +34,7 @@ function carregarReclamacoes() {
                 <p><strong>Empresa Reclamada:</strong> ${rec.empresa}</p>
                 <p><strong>Nome:</strong> ${rec.nome} | <strong>Email:</strong> ${rec.email}</p>
                 <p><strong>Endereço:</strong> ${rec.logradouro} <strong>Nº:</strong> ${rec.numero}
-                 <strong>Bairro:</strong> ${rec.bairro} <strong>Complemento:</strong> ${rec.complemento}</p> |
+                 <strong>Bairro:</strong> ${rec.bairro} <strong>Complemento:</strong> ${rec.complemento}</p> 
                 <p> <strong>Cidade:</strong> ${rec.cidade} <strong>UF:</strong> ${rec.uf}</p><br>
                 <p><strong>Reclamação:</strong> <br> ${rec.comentario}</p>
                 <button class="btn-excluir" data-id="${rec._id}">Excluir</button>
