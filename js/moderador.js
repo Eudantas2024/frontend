@@ -33,9 +33,9 @@ function carregarReclamacoes() {
                 <p><strong>Registrado em:</strong> ${new Date(rec.data).toLocaleString()}</p>
                 <p><strong>Empresa Reclamada:</strong> ${rec.empresa}</p>
                 <p><strong>Nome:</strong> ${rec.nome} | <strong>Email:</strong> ${rec.email}</p>
-                <strong>Endereço:</strong> ${rec.logradouro}</p> | <strong>Nº:</strong> ${rec.numero}</p> 
-                | <strong>Bairro:</strong> ${rec.bairro}</p> | <strong>Complemento:</strong> ${rec.complemento}</p> |
-                <strong>Email:</strong> ${rec.cidade}</p> | <strong>UF:</strong> ${rec.uf}</p><br>
+                <p><strong>Endereço:</strong> ${rec.logradouro} <strong>Nº:</strong> ${rec.numero}
+                 <strong>Bairro:</strong> ${rec.bairro} <strong>Complemento:</strong> ${rec.complemento}</p> |
+                <p> <strong>Cidade:</strong> ${rec.cidade} <strong>UF:</strong> ${rec.uf}</p><br>
                 <p><strong>Reclamação:</strong> <br> ${rec.comentario}</p>
                 <button class="btn-excluir" data-id="${rec._id}">Excluir</button>
                 <button class="editar-btn" data-id="${rec._id}">Editar</button>
